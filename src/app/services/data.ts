@@ -1,6 +1,6 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { Character, CharState, Quest, Rarety, Skill, SkillType, TagsType } from "../data/questmaker.data"
-import { Gear } from '../pages/gear/gear';
+import { Character, CharState, Gear, Quest, QuestImage, QuestStateType, Rarety, Skill, SkillRateType, SkillType, SubQuest, TagsType, ThemeType } from "../data/questmaker.data"
+
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +16,63 @@ export class Data {
 
   quests: WritableSignal<Quest[]> = signal([])
 
-  gear: WritableSignal<Gear[]> = signal([])
+  gears: WritableSignal<Gear[]> = signal([])
+
+  updateCharacter(editHero: Character) {
+        this.hero.set(editHero);
+  }
+
+  addSkill(skill: Skill) {
+    this.skills.update(current => [...current, skill])
+  }
+
+  removeSkill(name: SkillType) {
+    this.skills.update(current => current.filter(skill => skill.name !== name))
+  }
+
+  editSkill(editSkill: Skill) {
+    this.skills.update(current => current.map(skill => {
+      if (skill.name === editSkill.name) {
+        return editSkill
+      }
+      return skill
+    }
+  ))
+  }
+
+  addQuest(quest: Quest) {
+    this.quests.update(current => [...current, quest])
+  }
+
+  removeQuest(id: string) {
+    this.quests.update(current => current.filter(quest => quest.id !== id))
+  }
+
+  editQuest(editQuest: Quest) {
+    this.quests.update(current => current.map(quest => {
+      if (quest.id === editQuest.id) {
+        return editQuest
+      }
+      return quest
+    }
+  ))
+  }
+
+  addGear(gear: Gear) {
+    this.gears.update(current => [...current, gear])
+  }
+
+  removeGear(slot: number) {
+    this.gears.update(current => current.filter(gear => gear.slot !== slot))
+  }
+
+  editGear(editGear: Gear) {
+    this.gears.update(current => current.map(gear => {
+      if (gear.slot === editGear.slot) {
+        return editGear
+      }
+      return gear
+    }
+  ))
+  }
 }

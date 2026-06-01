@@ -1,11 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CharState } from '../../data/questmaker.data';
+import { Data } from '../../services/data';
 
 @Component({
   selector: 'app-character',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './character.html',
   styleUrl: './character.scss',
 })
 export class Character {
+  dataService = inject(Data)
+  charStates = Object.values(CharState)
 
+  characterForm = new FormGroup({
+    name: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    class: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    state: new FormControl(CharState.LOOKINGJOB, { nonNullable: true, validators: Validators.required }),
+  })
+
+  onSubmit() {
+    this.dataService.updateCharacter(this.characterForm.getRawValue())
+  }
 }

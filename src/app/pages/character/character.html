@@ -1,1 +1,19 @@
-<p>character works!</p>
+<form [formGroup]="characterForm" (ngSubmit)="onSubmit()">
+  <label for="charName">
+    Name :
+  </label>
+  <input id="charName" formControlName="name" />
+    <label for="charClass">
+        Class :
+  </label>
+  <input id="charClass" formControlName="class" />
+    <label for="charState">
+        State : 
+  </label>
+    <select id="charState" formControlName="state">
+        @for (state of charStates; track $index) {
+            <option [value]="state">{{ state }}</option>
+        }
+    </select>
+  <button type="submit">Edit Character</button>
+</form>

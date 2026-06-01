@@ -116,7 +116,7 @@ export interface Gear {
     name: string,
     logo: string,
     rarety: Rarety,
-    description : string,
+    description: string,
     slot: number,
     width: number,
     height: number,
