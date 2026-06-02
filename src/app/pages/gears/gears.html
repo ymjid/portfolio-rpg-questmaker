@@ -1,0 +1,42 @@
+<form (ngSubmit)="onSubmit()">
+    <button type="button" (click)="addForm()">Add Gear</button>
+   @for (item of gearForm.controls; track $index) {
+     <div [formGroup]="getGearGroup($index)">
+        <label for="gearName">
+            Name: 
+        </label>
+        <input id="gearName" formControlName="name">
+        <label for="gearLogo">
+            Logo: 
+        </label>
+        <input id="gearLogo" formControlName="logo">
+        <label for="gearRarety">
+            Rarety: 
+        </label>
+        <select id="gearRarety" formControlName="rarety">
+            @for (rarety of gearRarety; track $index) {
+                <option [value]="rarety">{{ rarety }}</option>
+            }
+        </select>
+        <label for="gearDescription">
+            Description: 
+        </label>
+        <input id="gearDescription" formControlName="description">
+        <label for="gearSlot">
+            Slot: 
+        </label>
+        <input id="gearSlot" formControlName="slot">
+        <label for="gearWidth">
+            Width: 
+        </label>
+        <input id="gearWidth" formControlName="width">
+        <label for="gearHeight">
+            Height: 
+        </label>
+        <input id="gearHeight" formControlName="height">
+     </div>
+     <button type="button" (click)="removeForm($index)">Remove Gear</button>
+   }
+   <br>
+  <button type="submit">Save Gears</button>
+</form>

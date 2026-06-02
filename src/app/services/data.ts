@@ -40,6 +40,10 @@ export class Data {
   ))
   }
 
+  setSkills(skills: Skill[]) {
+    this.skills.set(skills);
+  }
+
   addQuest(quest: Quest) {
     this.quests.update(current => [...current, quest])
   }
@@ -74,5 +78,9 @@ export class Data {
       return gear
     }
   ))
+  }
+
+  setGears(gears: Gear[]) {
+    this.gears.set(gears);
   }
 }
