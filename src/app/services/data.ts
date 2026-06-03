@@ -83,4 +83,8 @@ export class Data {
   setGears(gears: Gear[]) {
     this.gears.set(gears);
   }
+
+  setQuests(quests: Quest[]) {
+    this.quests.set(quests)
+  }
 }
