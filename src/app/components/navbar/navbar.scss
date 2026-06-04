@@ -1,0 +1,14 @@
+#navBar {
+    display:flex;
+    flex-direction: column;
+    position:fixed;
+}
+
+#navBar a:link, #navBar a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+#download {
+    cursor: pointer;
+}
