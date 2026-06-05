@@ -1,15 +1,20 @@
 <form (ngSubmit)="onSubmit()">
     <button type="button" (click)="addQuestForm()">Add Quest</button>
    @for (item of questForm.controls; track $index; let questIndex = $index) {
-     <div [formGroup]="getQuestGroup($index)">
+     <div class="field-group" [formGroup]="getQuestGroup($index)">
+        <div class="field">
         <label for="questName">
             Name: 
         </label>
         <input id="questName" formControlName="name">
+        </div>
+        <div class="field">
         <label for="questDescription">
             Description: 
         </label>
         <input id="questDescription" formControlName="description">
+        </div>
+        <div class="field">
         <label for="stateName">
             State: 
         </label>
@@ -18,14 +23,20 @@
                 <option [value]="state.text">{{ state.text }}</option>
             }
         </select>
+        </div>
+        <div class="field">
         <label for="questRelease">
             Release: 
         </label>
         <input id="questRelease" formControlName="release">
+        </div>
+        <div class="field">
         <label for="questPreview">
             Preview link: 
         </label>
         <input id="questPreview" formControlName="preview">
+        </div>
+        <div class="field">
         <label for="questTheme">
             Theme: 
         </label>
@@ -34,34 +45,45 @@
                 <option [value]="theme">{{ theme }}</option>
             }
         </select>
+        </div>
+        <div class="field">
         <label for="questCode">
             Source Code link: 
         </label>
         <input id="questCode" formControlName="code">
+        </div>
+        <div class="field">
         <label>
             Tags: 
         </label>
         <button type="button" (click)="addTag($index)">Add Tag</button>
         @for (tag of getTagGroup(questIndex).controls; track $index; let tagIndex = $index) {
-            <div>
+            <div class="field-group">
+                <div class="field">
                 <select [formControl]="getTagControl(questIndex, tagIndex)">
                 @for (tagName of questTag; track $index) {
                     <option [value]="tagName">{{ tagName }}</option>
                 }
                 </select>
+                </div>
                 <button type="button" (click)="removeTag(questIndex, tagIndex)">Remove Tag</button>
             </div>
         }
+        </div>
+        <div class="field">
         <label>
             Subquests: 
         </label>
         <button type="button" (click)="addSubquest($index)">Add Subquest</button>
         @for (subquest of getSubquestArray(questIndex).controls; track $index; let subquestIndex = $index) {
-            <div [formGroup]="getSubquestGroup(questIndex, subquestIndex)">
+            <div class="field-group" [formGroup]="getSubquestGroup(questIndex, subquestIndex)">
+                <div class="field">
                 <label>
                 Subquest Name: 
                 </label>
                 <input formControlName="name" >
+                </div>
+                <div class="field">
                 <label>
                 Subquest State: 
                 </label>
@@ -70,28 +92,36 @@
                         <option [value]="state.text">{{ state.text }}</option>
                     }
                 </select>
+                </div>
                 <button type="button" (click)="removeSubquest(questIndex, subquestIndex)">Remove Subquest</button>
             </div>
         }
+        </div>
+        <div class="field">
         <label>
             images: 
         </label>
         <button type="button" (click)="addImage($index)">Add Image</button>
         @for (image of getImageArray(questIndex).controls; track $index; let imageIndex = $index) {
-            <div [formGroup]="getImageGroup(questIndex, imageIndex)">
+            <div class="field-group" [formGroup]="getImageGroup(questIndex, imageIndex)">
+                <div class="field">
                 <label>
                 Image Url: 
                 </label>
                 <input formControlName="url" >
+                </div>
+                <div class="field">
                 <label>
                 Image Alt: 
                 </label>
                 <input formControlName="alt" >
+                </div>
                 <button type="button" (click)="removeImage(questIndex, imageIndex)">Remove Image</button>
             </div>
         }
+        </div>
+        <button type="button" (click)="removeQuest($index)">Remove Quest</button>
      </div>
-     <button type="button" (click)="removeQuest($index)">Remove Quest</button>
    }
    <br>
   <button type="submit">Save Quests</button>

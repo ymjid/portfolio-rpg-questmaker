@@ -1,12 +1,17 @@
 <form [formGroup]="characterForm" (ngSubmit)="onSubmit()">
+  <div class="field">
   <label for="charName">
     Name :
   </label>
   <input id="charName" formControlName="name" />
+  </div>
+  <div class="field">
     <label for="charClass">
         Class :
   </label>
   <input id="charClass" formControlName="class" />
+  </div>
+  <div class="field">
     <label for="charState">
         State : 
   </label>
@@ -15,5 +20,6 @@
             <option [value]="state">{{ state }}</option>
         }
     </select>
+    </div>
   <button type="submit">Edit Character</button>
 </form>

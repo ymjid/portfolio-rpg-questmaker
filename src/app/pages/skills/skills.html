@@ -2,17 +2,21 @@
 <form (ngSubmit)="onSubmit()">
     <button type="button" (click)="addForm()">Add Skill</button>
    @for (item of skillForm.controls; track $index) {
-     <div [formGroup]="getSkillGroup($index)">
+     <div class="field-group" [formGroup]="getSkillGroup($index)">
+        <div class="field">
         <label for="skillName">
             Name: 
         </label>
         <input id="skillName" formControlName="name">
+        </div>
+        <div class="field">
         <label for="skillRate">
             Rate: 
         </label>
         <input id="skillRate" formControlName="rate">
+        </div>
+        <button type="button" (click)="removeForm($index)">Remove Skill</button>
      </div>
-     <button type="button" (click)="removeForm($index)">Remove Skill</button>
    }
    <br>
   <button type="submit">Save Skills</button>

@@ -1,1 +1,24 @@
-
+<div class="data-container">
+    <div class="status container">
+        <p class="container-title">Status</p>
+        {{ isOnline }}
+    </div>
+    <div class="container">
+        <p class="container-title">Last Release</p>
+        <div class="update">
+            <p>{{ release.tag_name }}</p>
+            <p>{{ release.published_at }}</p>
+        </div>
+    </div>
+    <div class="container">
+        <p class="container-title">Last Commits</p>
+    <div class="commits">
+        @for (commit of commits; track $index) {
+            <div class="commit">
+                <p>{{ commit.commit.message }}</p>
+                <p>{{ commit.commit.author.date }}</p>
+            </div>
+        }
+    </div>
+    </div>
+</div>
