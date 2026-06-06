@@ -42,7 +42,7 @@
         </label>
         <select id="questTheme" formControlName="theme">
             @for (theme of questTheme(); track $index) {
-                <option [value]="theme">{{ theme }}</option>
+                <option [value]="theme.name">{{ theme.name }}</option>
             }
         </select>
         </div>
