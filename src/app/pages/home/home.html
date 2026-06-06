@@ -1,13 +1,20 @@
 <div class="data-container">
     <div class="status container">
         <p class="container-title">Status</p>
-        {{ isOnline }}
+        <p><span class="status-led"></span>
+        @if (isOnline) {
+            Online
+        }
+        @else {
+            Offline
+        }
+        </p>
     </div>
     <div class="container">
         <p class="container-title">Last Release</p>
         <div class="update">
             <p>{{ release.tag_name }}</p>
-            <p>{{ release.published_at }}</p>
+            <p>{{ release.published_at | date: 'dd/MM/yyyy - HH:mm' }}</p>
         </div>
     </div>
     <div class="container">
@@ -16,7 +23,7 @@
         @for (commit of commits; track $index) {
             <div class="commit">
                 <p>{{ commit.commit.message }}</p>
-                <p>{{ commit.commit.author.date }}</p>
+                <p>{{ commit.commit.author.date | date: 'dd/MM/yyyy - HH:mm' }}</p>
             </div>
         }
     </div>
