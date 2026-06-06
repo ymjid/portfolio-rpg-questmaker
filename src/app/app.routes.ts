@@ -4,6 +4,7 @@ import { Quests } from './pages/quests/quests';
 import { Skills } from './pages/skills/skills';
 import { Gears } from './pages/gears/gears';
 import { Home } from './pages/home/home';
+import { Settings } from './pages/settings/settings';
 
 export const routes: Routes = [
   { path: '',  component: Home},
@@ -11,5 +12,6 @@ export const routes: Routes = [
   { path: 'quests', component: Quests },
   { path: 'skills', component: Skills },
   { path: 'gears', component: Gears },
+  { path: 'settings', component: Settings },
 ];
 

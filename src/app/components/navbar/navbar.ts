@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Json } from '../../services/json';
-import { tablerFile, tablerBook, tablerShield, tablerUser, tablerList } from '@ng-icons/tabler-icons';
+import { tablerFile, tablerBook, tablerShield, tablerUser, tablerList, tablerSettings } from '@ng-icons/tabler-icons';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 
 @Component({
   selector: 'app-navbar',
   imports: [RouterLink, NgIcon],
-  providers: [provideIcons({ tablerFile, tablerBook, tablerShield, tablerUser, tablerList})],
+  providers: [provideIcons({ tablerFile, tablerBook, tablerShield, tablerUser, tablerList, tablerSettings})],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })

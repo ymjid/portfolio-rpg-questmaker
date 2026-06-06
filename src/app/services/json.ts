@@ -12,7 +12,9 @@ export class Json {
       "character": this.dataService.hero(),
       "skills": this.dataService.skills(),
       "quests": this.dataService.quests(),
-      "gear": this.dataService.gears()
+      "gear": this.dataService.gears(),
+      "tags": this.dataService.tags(),
+      "themes": this.dataService.themes()
     }
   }
 

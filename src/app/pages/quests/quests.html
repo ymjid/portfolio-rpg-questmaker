@@ -41,7 +41,7 @@
             Theme: 
         </label>
         <select id="questTheme" formControlName="theme">
-            @for (theme of questTheme; track $index) {
+            @for (theme of questTheme(); track $index) {
                 <option [value]="theme">{{ theme }}</option>
             }
         </select>
@@ -61,7 +61,7 @@
             <div class="field-group">
                 <div class="field">
                 <select [formControl]="getTagControl(questIndex, tagIndex)">
-                @for (tagName of questTag; track $index) {
+                @for (tagName of questTag(); track $index) {
                     <option [value]="tagName">{{ tagName }}</option>
                 }
                 </select>

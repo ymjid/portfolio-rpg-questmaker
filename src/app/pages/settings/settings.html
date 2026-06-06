@@ -1,0 +1,41 @@
+<div id="form-container">
+<form (ngSubmit)="onSubmitTag()">
+<button type="button" (click)="addNewTag()">Add Tag</button>
+@for (tag of tagForm.controls; track $index; let tagIndex = $index) {
+    <div class="field-group">
+    <div class="field">
+  <label for="tagName">
+    Name :
+  </label>
+  <input id="tagName" [formControl]="getNewTagControl(tagIndex)" />
+  </div>
+   <button type="button" (click)="removeNewTag(tagIndex)">Remove Tag</button>
+  </div>
+}
+  <button type="submit">Save Tags</button>
+</form>
+
+<form (ngSubmit)="onSubmitTheme()">
+<button type="button" (click)="addNewTheme()">Add Theme</button>
+@for (theme of themeForm.controls; track $index; let themeIndex = $index) {
+    <div class="field-group">
+    <div class="field">
+  <label for="themeName">
+    Name :
+  </label>
+  <input id="themeName" [formControl]="getNewThemeControl(themeIndex)" />
+  </div>
+  @for (tagVar of getThemeVariableKeys(); track $index; let themeVarIndex = $index) {
+  <div class="field">
+      <label>
+        {{ tagVar }}
+      </label>
+      <input [formControl]="getThemeVariableControl(themeIndex, tagVar)" />
+  </div>
+    }
+   <button type="button" (click)="removeNewTheme(themeIndex)">Remove Theme</button>
+  </div>
+}
+  <button type="submit">Save Themes</button>
+</form>
+</div>

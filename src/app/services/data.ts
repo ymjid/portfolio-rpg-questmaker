@@ -1,5 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { Character, CharState, Gear, Quest, QuestImage, QuestStateType, Rarety, Skill, SkillRateType, SkillType, SubQuest, TagsType, ThemeType } from "../data/questmaker.data"
+import { Character, CharState, Gear, Quest, Skill, SkillType, Theme } from "../data/questmaker.data"
 
 
 @Injectable({
@@ -17,6 +17,10 @@ export class Data {
   quests: WritableSignal<Quest[]> = signal([])
 
   gears: WritableSignal<Gear[]> = signal([])
+
+  tags: WritableSignal<string[]> = signal([])
+
+  themes: WritableSignal<Theme[]> = signal([])
 
   updateCharacter(editHero: Character) {
         this.hero.set(editHero);
@@ -86,5 +90,13 @@ export class Data {
 
   setQuests(quests: Quest[]) {
     this.quests.set(quests)
+  }
+
+  setTags(tags: string[])  {
+    this.tags.set(tags)
+  }
+
+  setThemes(themes: Theme[])  {
+    this.themes.set(themes)
   }
 }

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Data } from '../../services/data';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Quest, QuestState, SubQuest, TagsType, ThemeType } from '../../data/questmaker.data';
+import { Quest, QuestState, ThemeType } from '../../data/questmaker.data';
 
 @Component({
   selector: 'app-quests',
@@ -12,8 +12,9 @@ import { Quest, QuestState, SubQuest, TagsType, ThemeType } from '../../data/que
 export class Quests {
   dataService = inject(Data)
   questState = Object.values(QuestState)
-  questTheme = Object.values(ThemeType)
-  questTag = Object.values(TagsType)
+  questTheme = this.dataService.themes
+  questTag = this.dataService.tags
+
   
   questForm = new FormArray<FormGroup>([])
 

@@ -16,6 +16,7 @@ export type QuestStateType = {
     text: string;
     icon:  string;
 }
+
 export const QuestState = {
     PROGRESS: {
         text: "progress",
@@ -33,16 +34,6 @@ export const QuestState = {
         text: "locked",
         icon: "tablerLock",
     },
-}
-
-export enum TagsType {
-    HTML = "HTML",
-    CSS = "CSS",
-    JAVASCRIPT = "JavaScript",
-    TYPESCRIPT = "TypeScript",
-    ANGULAR = "Angular",
-    SCSS = "SCSS",
-    PHP = "PHP",
 }
 
 export enum ThemeType {
@@ -65,11 +56,11 @@ export interface Quest {
     name: string,
     description: string, 
     release: string
-    tags: TagsType[],
+    tags: string[],
     subquests: SubQuest[],
     state: QuestStateType,
     preview?: string,
-    theme?: ThemeType,
+    theme?: string,
     images?: QuestImage[],
     code?: string,
 }
@@ -120,4 +111,16 @@ export interface Gear {
     slot: number,
     width: number,
     height: number,
+}
+
+export type ThemeVariableType = {
+  "--portal-primary": string;
+  "--portal-bg": string;
+  "--portal-text": string;
+  "--portal-card": string;
+  "--portal-border": string;
+}
+export interface Theme {
+    name: string,
+    variables: ThemeVariableType
 }
