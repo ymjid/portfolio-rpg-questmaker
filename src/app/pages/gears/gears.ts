@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Data } from '../../services/data';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Gear, Rarety } from '../../data/questmaker.data';
+import { Notif } from '../../services/notif';
 
 @Component({
   selector: 'app-gears',
@@ -12,6 +13,7 @@ import { Gear, Rarety } from '../../data/questmaker.data';
 export class Gears {
   dataService = inject(Data)
   gearRarety = Object.values(Rarety)
+  notifService = inject(Notif)
 
   gearForm = new FormArray<FormGroup>([])
 
@@ -37,5 +39,6 @@ export class Gears {
   
     onSubmit() {
       this.dataService.setGears(this.gearForm.getRawValue()  as Gear[])
+      this.notifService.showSaved()
     }
 }

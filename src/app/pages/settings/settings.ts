@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Data } from '../../services/data';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Theme } from '../../data/questmaker.data';
+import { Notif } from '../../services/notif';
 
 @Component({
   selector: 'app-settings',
@@ -11,6 +12,7 @@ import { Theme } from '../../data/questmaker.data';
 })
 export class Settings {
     dataService = inject(Data)
+    notifService = inject(Notif)
     
   tagForm = new FormArray<FormControl>([])
   themeForm = new FormArray<FormGroup>([])
@@ -25,6 +27,7 @@ export class Settings {
 
   onSubmitTag() {
     this.dataService.setTags(this.tagForm.getRawValue()  as string[])
+    this.notifService.showSaved();
   }
 
   getNewTagControl(tagIndex: number): FormControl {
@@ -50,6 +53,7 @@ export class Settings {
 
   onSubmitTheme() {
     this.dataService.setThemes(this.themeForm.getRawValue()  as Theme[])
+    this.notifService.showSaved();
   }
 
   getNewThemeControl(themeIndex: number): FormControl {

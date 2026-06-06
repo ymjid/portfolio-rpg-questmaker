@@ -1,5 +1,5 @@
 <div id="form-container">
-<form (ngSubmit)="onSubmitTag()">
+<form>
 <button type="button" (click)="addNewTag()">Add Tag</button>
 @for (tag of tagForm.controls; track $index; let tagIndex = $index) {
     <div class="field-group">
@@ -12,10 +12,10 @@
    <button type="button" (click)="removeNewTag(tagIndex)">Remove Tag</button>
   </div>
 }
-  <button type="submit">Save Tags</button>
+  <button type="button" (click)="onSubmitTag()">Save Tags</button>
 </form>
 
-<form (ngSubmit)="onSubmitTheme()">
+<form>
 <button type="button" (click)="addNewTheme()">Add Theme</button>
 @for (theme of themeForm.controls; track $index; let themeIndex = $index) {
     <div class="field-group">
@@ -36,6 +36,6 @@
    <button type="button" (click)="removeNewTheme(themeIndex)">Remove Theme</button>
   </div>
 }
-  <button type="submit">Save Themes</button>
+  <button type="button" (click)="onSubmitTheme()">Save Themes</button>
 </form>
 </div>

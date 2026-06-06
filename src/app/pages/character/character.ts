@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CharState } from '../../data/questmaker.data';
 import { Data } from '../../services/data';
+import { Notif } from '../../services/notif';
 
 @Component({
   selector: 'app-character',
@@ -12,6 +13,7 @@ import { Data } from '../../services/data';
 export class Character {
   dataService = inject(Data)
   charStates = Object.values(CharState)
+  notifService = inject(Notif)
 
   characterForm = new FormGroup({
     name: new FormControl('', { nonNullable: true, validators: Validators.required }),
@@ -21,5 +23,6 @@ export class Character {
 
   onSubmit() {
     this.dataService.updateCharacter(this.characterForm.getRawValue())
+    this.notifService.showSaved()
   }
 }

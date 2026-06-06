@@ -1,6 +1,7 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
+import { Notif } from './services/notif';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { Navbar } from './components/navbar/navbar';
 })
 export class App {
   protected readonly title = signal('portfolio-rpg-questmaker');
+  notifService = inject(Notif)
 
   @HostListener('document:mousemove', ['$event'])
 onMouseMove(event: MouseEvent) {

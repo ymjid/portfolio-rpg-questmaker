@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Data } from '../../services/data';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Quest, QuestState, ThemeType } from '../../data/questmaker.data';
+import { Notif } from '../../services/notif';
 
 @Component({
   selector: 'app-quests',
@@ -14,6 +15,7 @@ export class Quests {
   questState = Object.values(QuestState)
   questTheme = this.dataService.themes
   questTag = this.dataService.tags
+  notifService = inject(Notif)
 
   
   questForm = new FormArray<FormGroup>([])
@@ -109,5 +111,6 @@ export class Quests {
 
   onSubmit() {
     this.dataService.setQuests(this.questForm.getRawValue()  as Quest[])
+    this.notifService.showSaved()
   }
 }

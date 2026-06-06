@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Data } from '../../services/data';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Skill } from '../../data/questmaker.data';
+import { Notif } from '../../services/notif';
 
 @Component({
   selector: 'app-skills',
@@ -11,6 +12,7 @@ import { Skill } from '../../data/questmaker.data';
 })
 export class Skills {
   dataService = inject(Data)
+  notifService = inject(Notif)
 
   skillForm = new FormArray<FormGroup>([])
 
@@ -31,5 +33,6 @@ export class Skills {
 
   onSubmit() {
     this.dataService.setSkills(this.skillForm.getRawValue()  as Skill[])
+    this.notifService.showSaved();
   }
 }

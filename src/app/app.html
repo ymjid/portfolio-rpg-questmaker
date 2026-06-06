@@ -2,6 +2,9 @@
 <app-navbar />
 </div>
 <div id="page-container">
+@if (notifService.saved()) {
+  <span class="saved-msg">Saved ✓</span>
+}
 <router-outlet />
 </div>
 <div class="cursor"></div>

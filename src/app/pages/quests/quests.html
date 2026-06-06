@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()">
+<form>
     <button type="button" (click)="addQuestForm()">Add Quest</button>
    @for (item of questForm.controls; track $index; let questIndex = $index) {
      <div class="field-group" [formGroup]="getQuestGroup($index)">
@@ -124,5 +124,5 @@
      </div>
    }
    <br>
-  <button type="submit">Save Quests</button>
+  <button type="button" (click)="onSubmit()">Save Quests</button>
 </form>

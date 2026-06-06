@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()">
+<form>
     <button type="button" (click)="addForm()">Add Gear</button>
    @for (item of gearForm.controls; track $index) {
      <div class="field-group" [formGroup]="getGearGroup($index)">
@@ -52,5 +52,5 @@
      </div>
    }
    <br>
-  <button type="submit">Save Gears</button>
+  <button type="button" (click)="onSubmit()">Save Gears</button>
 </form>

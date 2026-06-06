@@ -1,5 +1,5 @@
 
-<form (ngSubmit)="onSubmit()">
+<form>
     <button type="button" (click)="addForm()">Add Skill</button>
    @for (item of skillForm.controls; track $index) {
      <div class="field-group" [formGroup]="getSkillGroup($index)">
@@ -19,5 +19,5 @@
      </div>
    }
    <br>
-  <button type="submit">Save Skills</button>
+  <button type="button" (click)="onSubmit()">Save Skills</button>
 </form>
