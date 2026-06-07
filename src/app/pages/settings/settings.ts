@@ -16,6 +16,16 @@ export class Settings implements OnInit{
     
   tagForm = new FormArray<FormControl>([])
   themeForm = new FormArray<FormGroup>([])
+  newTagsOpen: boolean[] = []
+  newThemesOpen: boolean[] = []
+
+  toggleNewTagSection(index: number) {
+    this.newTagsOpen[index] = !this.newTagsOpen[index];
+  }
+
+  toggleNewThemeSection(index: number) {
+    this.newThemesOpen[index] = !this.newThemesOpen[index];
+  }
 
   ngOnInit() {
   this.dataService.tags().forEach(tag => {
@@ -38,6 +48,7 @@ export class Settings implements OnInit{
 
   addNewTag() {
     this.tagForm.push(new FormControl(''))
+    this.newTagsOpen.push(true)
   }
 
   removeNewTag(tagIndex: number) {
@@ -64,6 +75,7 @@ export class Settings implements OnInit{
         "--portal-border": new FormControl(''),
       })
     }))
+    this.newThemesOpen.push(true)
   }
 
   removeNewTheme(themeIndex: number) {

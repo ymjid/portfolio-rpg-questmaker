@@ -3,6 +3,8 @@
 <button type="button" (click)="addNewTag()">Add Tag</button>
 @for (tag of tagForm.controls; track $index; let tagIndex = $index) {
     <div class="field-group">
+      <div class="group-toggler" (click)="toggleNewTagSection($index)">Tag {{ tagIndex + 1 }}</div>
+        @if (newTagsOpen[tagIndex]) {
     <div class="field">
   <label for="tagName">
     Name :
@@ -10,6 +12,7 @@
   <input id="tagName" [formControl]="getNewTagControl(tagIndex)" />
   </div>
    <button type="button" (click)="removeNewTag(tagIndex)">Remove Tag</button>
+}
   </div>
 }
   <button type="button" (click)="onSubmitTag()">Save Tags</button>
@@ -19,6 +22,8 @@
 <button type="button" (click)="addNewTheme()">Add Theme</button>
 @for (theme of themeForm.controls; track $index; let themeIndex = $index) {
     <div class="field-group">
+            <div class="group-toggler" (click)="toggleNewThemeSection($index)">Theme {{ themeIndex + 1 }}</div>
+        @if (newThemesOpen[themeIndex]) {
     <div class="field">
   <label for="themeName">
     Name :
@@ -34,6 +39,7 @@
   </div>
     }
    <button type="button" (click)="removeNewTheme(themeIndex)">Remove Theme</button>
+  }
   </div>
 }
   <button type="button" (click)="onSubmitTheme()">Save Themes</button>

@@ -16,6 +16,11 @@ export class Skills implements OnInit{
   rateSkills = Object.values(SkillRate)
 
   skillForm = new FormArray<FormGroup>([])
+  skillOpen: boolean[] = []
+
+  toggleSkillSection(index: number) {
+    this.skillOpen[index] = !this.skillOpen[index];
+  }
 
   ngOnInit() {
   this.dataService.skills().forEach(skill => {
@@ -31,6 +36,7 @@ export class Skills implements OnInit{
       name: new FormControl(""),
       rate: new FormControl(0),
     }));
+    this.skillOpen.push(true)
   }
 
   removeForm(index: number) {

@@ -19,6 +19,26 @@ export class Quests implements OnInit {
 
   
   questForm = new FormArray<FormGroup>([])
+  questsOpen: boolean[] = []
+  questTagsOpen: boolean[] = []
+  questSubquestsOpen: boolean[] = []
+  questImagesOpen: boolean[] = []
+
+  toggleQuestSection(index: number) {
+    this.questsOpen[index] = !this.questsOpen[index];
+  }
+
+  toggleTagSection(index: number) {
+    this.questTagsOpen[index] = !this.questTagsOpen[index];
+  }
+
+  toggleSubquestSection(index: number) {
+    this.questSubquestsOpen[index] = !this.questSubquestsOpen[index];
+  }
+
+  toggleImageSection(index: number) {
+    this.questImagesOpen[index] = !this.questImagesOpen[index];
+  }
 
     ngOnInit() {
   this.dataService.quests().forEach(quest => {
@@ -58,6 +78,7 @@ export class Quests implements OnInit {
         subquests: new FormArray([]),
         images: new FormArray([])
       }));
+      this.questsOpen.push(true)
   }
 
   removeQuest(index: number) {
@@ -72,6 +93,7 @@ export class Quests implements OnInit {
     const quest = this.questForm.at(questIndex) as FormGroup
     const tags = quest.get('tags') as FormArray
     tags.push(new FormControl(''))
+    this.questTagsOpen.push(true)
   }
 
   removeTag(questIndex: number, tagIndex: number) {
@@ -95,6 +117,7 @@ export class Quests implements OnInit {
         name: new FormControl(""),
         state: new FormControl(""),
     }))
+    this.questSubquestsOpen.push(true)
   }
 
   removeSubquest(questIndex: number, subquestIndex: number) {
@@ -118,6 +141,7 @@ export class Quests implements OnInit {
             url: new FormControl(""),
             alt: new FormControl(""),
     }))
+    this.questImagesOpen.push(true);
   }
 
   removeImage(questIndex: number, imageIndex: number) {

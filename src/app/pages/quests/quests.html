@@ -2,6 +2,8 @@
     <button type="button" (click)="addQuestForm()">Add Quest</button>
    @for (item of questForm.controls; track $index; let questIndex = $index) {
      <div class="field-group" [formGroup]="getQuestGroup($index)">
+        <div class="group-toggler" (click)="toggleQuestSection($index)">Quest {{ questIndex + 1}}</div>
+        @if (questsOpen[questIndex]) {
         <div class="field">
         <label for="questName">
             Name: 
@@ -59,6 +61,8 @@
         <button type="button" (click)="addTag($index)">Add Tag</button>
         @for (tag of getTagGroup(questIndex).controls; track $index; let tagIndex = $index) {
             <div class="field-group">
+                <div class="group-toggler" (click)="toggleTagSection($index)">Tag {{ tagIndex + 1 }}</div>
+                @if (questTagsOpen[tagIndex]) {
                 <div class="field">
                 <select [formControl]="getTagControl(questIndex, tagIndex)">
                 @for (tagName of questTag(); track $index) {
@@ -67,6 +71,7 @@
                 </select>
                 </div>
                 <button type="button" (click)="removeTag(questIndex, tagIndex)">Remove Tag</button>
+                }
             </div>
         }
         </div>
@@ -77,6 +82,8 @@
         <button type="button" (click)="addSubquest($index)">Add Subquest</button>
         @for (subquest of getSubquestArray(questIndex).controls; track $index; let subquestIndex = $index) {
             <div class="field-group" [formGroup]="getSubquestGroup(questIndex, subquestIndex)">
+                <div class="group-toggler" (click)="toggleSubquestSection($index)">Subquest {{ subquestIndex + 1 }}</div>
+                @if (questSubquestsOpen[subquestIndex]) {
                 <div class="field">
                 <label>
                 Subquest Name: 
@@ -94,6 +101,7 @@
                 </select>
                 </div>
                 <button type="button" (click)="removeSubquest(questIndex, subquestIndex)">Remove Subquest</button>
+                }
             </div>
         }
         </div>
@@ -104,6 +112,8 @@
         <button type="button" (click)="addImage($index)">Add Image</button>
         @for (image of getImageArray(questIndex).controls; track $index; let imageIndex = $index) {
             <div class="field-group" [formGroup]="getImageGroup(questIndex, imageIndex)">
+                <div class="group-toggler" (click)="toggleImageSection($index)">Image {{ imageIndex + 1 }}</div>
+                @if (questImagesOpen[imageIndex]) {
                 <div class="field">
                 <label>
                 Image Url: 
@@ -117,10 +127,12 @@
                 <input formControlName="alt" >
                 </div>
                 <button type="button" (click)="removeImage(questIndex, imageIndex)">Remove Image</button>
+                }
             </div>
         }
         </div>
         <button type="button" (click)="removeQuest($index)">Remove Quest</button>
+    }
      </div>
    }
    <br>

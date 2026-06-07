@@ -3,6 +3,8 @@
     <button type="button" (click)="addForm()">Add Skill</button>
    @for (item of skillForm.controls; track $index) {
      <div class="field-group" [formGroup]="getSkillGroup($index)">
+        <div class="group-toggler" (click)="toggleSkillSection($index)">Skill {{ $index + 1 }}</div>
+        @if (skillOpen[$index]) {
         <div class="field">
         <label for="skillName">
             Name: 
@@ -20,6 +22,7 @@
         </select>
         </div>
         <button type="button" (click)="removeForm($index)">Remove Skill</button>
+    }
      </div>
    }
    <br>

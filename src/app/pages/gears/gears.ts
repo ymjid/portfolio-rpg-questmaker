@@ -16,6 +16,11 @@ export class Gears implements OnInit{
   notifService = inject(Notif)
 
   gearForm = new FormArray<FormGroup>([])
+  gearOpen: boolean[] = []
+
+  toggleGearSection(index: number) {
+    this.gearOpen[index] = !this.gearOpen[index];
+  }
 
       ngOnInit() {
   this.dataService.gears().forEach(gear => {
@@ -41,6 +46,7 @@ export class Gears implements OnInit{
         width: new FormControl(0),
         height: new FormControl(0),
       }));
+      this.gearOpen.push(true)
     }
   
     removeForm(index: number) {

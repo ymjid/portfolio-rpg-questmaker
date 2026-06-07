@@ -2,6 +2,8 @@
     <button type="button" (click)="addForm()">Add Gear</button>
    @for (item of gearForm.controls; track $index) {
      <div class="field-group" [formGroup]="getGearGroup($index)">
+        <div class="group-toggler" (click)="toggleGearSection($index)">Gear {{ $index + 1 }}</div>
+        @if (gearOpen[$index]) {
         <div class="field">
         <label for="gearName">
             Name: 
@@ -49,6 +51,7 @@
         <input type="number" id="gearHeight" formControlName="height">
         </div>
         <button type="button" (click)="removeForm($index)">Remove Gear</button>
+    }
      </div>
    }
    <br>
