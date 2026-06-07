@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Data } from '../../services/data';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Quest, QuestState, ThemeType } from '../../data/questmaker.data';
+import { Quest, QuestImage, QuestState, ThemeType } from '../../data/questmaker.data';
 import { Notif } from '../../services/notif';
 
 @Component({
@@ -10,7 +10,7 @@ import { Notif } from '../../services/notif';
   templateUrl: './quests.html',
   styleUrl: './quests.scss',
 })
-export class Quests {
+export class Quests implements OnInit {
   dataService = inject(Data)
   questState = Object.values(QuestState)
   questTheme = this.dataService.themes
@@ -19,6 +19,29 @@ export class Quests {
 
   
   questForm = new FormArray<FormGroup>([])
+
+    ngOnInit() {
+  this.dataService.quests().forEach(quest => {
+    this.questForm.push(new FormGroup({
+        name: new FormControl(quest.name),
+        description: new FormControl(quest.description),
+        state: new FormControl(quest.state),
+        release: new FormControl(quest.release),
+        preview: new FormControl(quest.preview),
+        theme: new FormControl(quest.theme),
+        code: new FormControl(quest.code),
+        tags: new FormArray(quest.tags.map(tag => new FormControl(tag))),
+        subquests: new FormArray(quest.subquests.map(subquest => new FormGroup({
+          name: new FormControl(subquest.name),
+          state: new FormControl(subquest.state),
+        }))),
+        images: new FormArray((quest.images as QuestImage[]).map(image => new FormGroup({
+          url: new FormControl(image.url),
+          alt: new FormControl(image.alt),
+        }))),
+      }))
+  })
+}
 
   addQuestForm() {
       this.questForm.push(new FormGroup({

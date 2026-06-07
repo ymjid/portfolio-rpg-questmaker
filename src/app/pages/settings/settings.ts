@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Data } from '../../services/data';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Theme } from '../../data/questmaker.data';
@@ -10,12 +10,31 @@ import { Notif } from '../../services/notif';
   templateUrl: './settings.html',
   styleUrl: './settings.scss',
 })
-export class Settings {
+export class Settings implements OnInit{
     dataService = inject(Data)
     notifService = inject(Notif)
     
   tagForm = new FormArray<FormControl>([])
   themeForm = new FormArray<FormGroup>([])
+
+  ngOnInit() {
+  this.dataService.tags().forEach(tag => {
+    this.tagForm.push(new FormControl(tag))
+  })
+
+    this.dataService.themes().forEach(theme => {
+    this.themeForm.push(new FormGroup({
+      name: new FormControl(theme.name),
+      variables: new FormGroup({
+        "--portal-primary": new FormControl(theme.variables['--portal-primary']),
+        "--portal-bg": new FormControl(theme.variables['--portal-bg']),
+        "--portal-text": new FormControl(theme.variables['--portal-text']),
+         "--portal-card": new FormControl(theme.variables['--portal-card']),
+        "--portal-border": new FormControl(theme.variables['--portal-border']),
+      })
+    }))
+  })
+}
 
   addNewTag() {
     this.tagForm.push(new FormControl(''))

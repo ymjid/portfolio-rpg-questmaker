@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Data } from '../../services/data';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Skill } from '../../data/questmaker.data';
@@ -10,11 +10,20 @@ import { Notif } from '../../services/notif';
   templateUrl: './skills.html',
   styleUrl: './skills.scss',
 })
-export class Skills {
+export class Skills implements OnInit{
   dataService = inject(Data)
   notifService = inject(Notif)
 
   skillForm = new FormArray<FormGroup>([])
+
+  ngOnInit() {
+  this.dataService.skills().forEach(skill => {
+    this.skillForm.push(new FormGroup({
+      name: new FormControl(skill.name),
+      rate: new FormControl(skill.rate),
+    }))
+  })
+}
 
   addForm() {
     this.skillForm.push(new FormGroup({

@@ -19,4 +19,8 @@ export class GithubService {
   public checkIfOnline(): Observable<any>{
     return this.httpClient.head<any[]>(`https://ymjid.github.io/portfolio-rpg/`);
   }
+
+  public getDataJson(): Observable<any> {
+    return this.httpClient.get<any[]>(`https://raw.githubusercontent.com/ymjid/portfolio-rpg-data/main/data.json`);
+  }
 }
