@@ -23,9 +23,10 @@ export class Quests implements OnInit {
     ngOnInit() {
   this.dataService.quests().forEach(quest => {
     this.questForm.push(new FormGroup({
+        id: new FormControl(quest.id),
         name: new FormControl(quest.name),
         description: new FormControl(quest.description),
-        state: new FormControl(quest.state),
+        state: new FormControl(quest.state.text),
         release: new FormControl(quest.release),
         preview: new FormControl(quest.preview),
         theme: new FormControl(quest.theme),
@@ -33,7 +34,7 @@ export class Quests implements OnInit {
         tags: new FormArray(quest.tags.map(tag => new FormControl(tag))),
         subquests: new FormArray(quest.subquests.map(subquest => new FormGroup({
           name: new FormControl(subquest.name),
-          state: new FormControl(subquest.state),
+          state: new FormControl(subquest.state.text),
         }))),
         images: new FormArray((quest.images as QuestImage[]).map(image => new FormGroup({
           url: new FormControl(image.url),
@@ -45,6 +46,7 @@ export class Quests implements OnInit {
 
   addQuestForm() {
       this.questForm.push(new FormGroup({
+        id: new FormControl(Date.now().toString()),
         name: new FormControl(""),
         description: new FormControl(""),
         state: new FormControl(""),
@@ -133,7 +135,23 @@ export class Quests implements OnInit {
   }
 
   onSubmit() {
-    this.dataService.setQuests(this.questForm.getRawValue()  as Quest[])
+        const quests = this.questForm.getRawValue().map((quest, index) => ({
+          id: quest['id'],
+          name: quest['name'],
+          description: quest['description'],
+          state: Object.values(QuestState).find(r => r.text === quest['state']),
+          release: quest['release'],
+          preview: quest['preview'],
+          theme: quest['theme'],
+          code: quest['code'],
+          tags: quest['tags'],
+          subquests: quest['subquests'].map((subquest: any) => ({
+            name: subquest.name,
+            state: Object.values(QuestState).find(r => r.text === subquest.state),
+          })),
+          images: quest['images']
+        }))
+    this.dataService.setQuests(quests as Quest[])
     this.notifService.showSaved()
   }
 }

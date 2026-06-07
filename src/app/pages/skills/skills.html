@@ -13,7 +13,11 @@
         <label for="skillRate">
             Rate: 
         </label>
-        <input type="number" id="skillRate" formControlName="rate">
+        <select id="skillRate" formControlName="rate">
+            @for (rate of rateSkills; track $index) {
+                <option [value]="rate.value">{{ rate.name }}</option>
+            }
+        </select>
         </div>
         <button type="button" (click)="removeForm($index)">Remove Skill</button>
      </div>

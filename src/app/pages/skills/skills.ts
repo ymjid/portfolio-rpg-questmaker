@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Data } from '../../services/data';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Skill } from '../../data/questmaker.data';
+import { Skill, SkillRate } from '../../data/questmaker.data';
 import { Notif } from '../../services/notif';
 
 @Component({
@@ -13,6 +13,7 @@ import { Notif } from '../../services/notif';
 export class Skills implements OnInit{
   dataService = inject(Data)
   notifService = inject(Notif)
+  rateSkills = Object.values(SkillRate)
 
   skillForm = new FormArray<FormGroup>([])
 
@@ -20,7 +21,7 @@ export class Skills implements OnInit{
   this.dataService.skills().forEach(skill => {
     this.skillForm.push(new FormGroup({
       name: new FormControl(skill.name),
-      rate: new FormControl(skill.rate),
+      rate: new FormControl(skill.rate.value),
     }))
   })
 }
@@ -41,7 +42,11 @@ export class Skills implements OnInit{
   }
 
   onSubmit() {
-    this.dataService.setSkills(this.skillForm.getRawValue()  as Skill[])
+    const skills = this.skillForm.getRawValue().map(skill => ({
+      name: skill['name'],
+      rate: Object.values(SkillRate).find(r => r.value === skill['rate'])
+    }))
+    this.dataService.setSkills(skills as Skill[])
     this.notifService.showSaved();
   }
 }
