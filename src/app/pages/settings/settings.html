@@ -30,7 +30,7 @@
       <label>
         {{ tagVar }}
       </label>
-      <input [formControl]="getThemeVariableControl(themeIndex, tagVar)" />
+      <input type="color" [formControl]="getThemeVariableControl(themeIndex, tagVar)" />
   </div>
     }
    <button type="button" (click)="removeNewTheme(themeIndex)">Remove Theme</button>

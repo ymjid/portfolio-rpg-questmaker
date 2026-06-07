@@ -34,19 +34,19 @@
         <label for="gearSlot">
             Slot: 
         </label>
-        <input id="gearSlot" formControlName="slot">
+        <input type="number" id="gearSlot" formControlName="slot">
         </div>
         <div class="field">
         <label for="gearWidth">
             Width: 
         </label>
-        <input id="gearWidth" formControlName="width">
+        <input type="number" id="gearWidth" formControlName="width">
         </div>
         <div class="field">
         <label for="gearHeight">
             Height: 
         </label>
-        <input id="gearHeight" formControlName="height">
+        <input type="number" id="gearHeight" formControlName="height">
         </div>
         <button type="button" (click)="removeForm($index)">Remove Gear</button>
      </div>
