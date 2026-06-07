@@ -83,6 +83,7 @@ export class Quests implements OnInit {
 
   removeQuest(index: number) {
     this.questForm.removeAt(index)
+    this.questsOpen.splice(index, 1)
   }
 
   getQuestGroup(index: number): FormGroup {
@@ -100,6 +101,7 @@ export class Quests implements OnInit {
     const quest = this.questForm.at(questIndex) as FormGroup
     const tags = quest.get('tags') as FormArray
     tags.removeAt(tagIndex)
+    this.questTagsOpen.splice(tagIndex, 1)
   }
 
   getTagGroup(index: number): FormArray {
@@ -124,6 +126,7 @@ export class Quests implements OnInit {
     const quest = this.questForm.at(questIndex) as FormGroup
     const subquests = quest.get('subquests') as FormArray
     subquests.removeAt(subquestIndex)
+    this.questSubquestsOpen.splice(subquestIndex, 1)
   }
 
   getSubquestArray(index: number): FormArray {
@@ -148,6 +151,7 @@ export class Quests implements OnInit {
     const quest = this.questForm.at(questIndex) as FormGroup
     const images = quest.get('images') as FormArray
     images.removeAt(imageIndex)
+    this.questImagesOpen.splice(imageIndex, 1)
   }
 
   getImageArray(index: number): FormArray {

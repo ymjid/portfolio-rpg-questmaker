@@ -41,6 +41,7 @@ export class Skills implements OnInit{
 
   removeForm(index: number) {
     this.skillForm.removeAt(index)
+    this.skillOpen.splice(index, 1)
   }
 
   getSkillGroup(index: number): FormGroup {

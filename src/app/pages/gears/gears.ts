@@ -51,6 +51,7 @@ export class Gears implements OnInit{
   
     removeForm(index: number) {
       this.gearForm.removeAt(index)
+      this.gearOpen.splice(index, 1)
     }
   
     getGearGroup(index: number): FormGroup {

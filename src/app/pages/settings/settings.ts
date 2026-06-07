@@ -53,6 +53,7 @@ export class Settings implements OnInit{
 
   removeNewTag(tagIndex: number) {
     this.tagForm.removeAt(tagIndex)
+    this.newTagsOpen.splice(tagIndex, 1)
   }
 
   onSubmitTag() {
@@ -80,6 +81,7 @@ export class Settings implements OnInit{
 
   removeNewTheme(themeIndex: number) {
     this.themeForm.removeAt(themeIndex)
+    this.newThemesOpen.splice(themeIndex, 1)
   }
 
   onSubmitTheme() {
