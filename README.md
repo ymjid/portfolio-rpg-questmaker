@@ -7,7 +7,7 @@ then exporting a data.json file to update the portfolio.
 Built as my second Angular project, mentored by Claude (Anthropic) throughout the development process.
 
 ## 🖼️ Preview
-<!-- Add a screenshot here once deployed -->
+https://raw.githubusercontent.com/ymjid/portfolio-rpg-questmaker/main/public/assets/preview.png
 
 ## ✨ Features
 - Dashboard with portfolio status (online/offline, last release, commit feed)
