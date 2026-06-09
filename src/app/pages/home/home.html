@@ -3,7 +3,7 @@
 <div class="data-container">
     <div class="status container">
         <p class="container-title">Status</p>
-        <p><span class="status-led"></span>
+        <p><span class="status-led" [ngClass]="{'online-status': isOnline, 'offline-status': !isOnline}"></span>
         @if (isOnline) {
             Online
         }

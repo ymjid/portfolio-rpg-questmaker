@@ -37,15 +37,29 @@
 width: 0.5rem;
   height: 0.5rem;
   border-radius: 50rem;
-  box-shadow: 0 0 8px #00ff00;
   display: inline-block;
-  background-color: #00ff00;
   vertical-align: center;
-  animation: pulse 1.5s infinite;
   margin-left: 0.5rem;
 }
 
-@keyframes pulse {
+.online-status {
+    box-shadow: 0 0 8px #00ff00;
+    background-color: #00ff00;
+    animation: pulse-online 1.5s infinite;
+}
+
+.offline-status {
+    box-shadow: 0 0 8px #ff0000;
+    background-color: #ff0000;
+    animation: pulse-offline 1.5s infinite;
+}
+
+@keyframes pulse-online {
   0%, 100% { box-shadow: 0 0 4px #00ff00; }
   50% { box-shadow: 0 0 12px #00ff00; }
+}
+
+@keyframes pulse-offline {
+  0%, 100% { box-shadow: 0 0 4px #ff0000; }
+  50% { box-shadow: 0 0 12px #ff0000; }
 }

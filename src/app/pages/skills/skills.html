@@ -26,5 +26,7 @@
      </div>
    }
    <br>
-  <button type="button" (click)="onSubmit()">Save Skills</button>
+   @if (skillForm.controls.length > 0) {
+    <button type="button" (click)="onSubmit()">Save Skills</button>
+   }
 </form>

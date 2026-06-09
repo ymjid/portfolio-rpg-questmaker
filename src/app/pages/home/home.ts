@@ -1,10 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { GithubService } from '../../services/github';
 import { DatePipe } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [DatePipe],
+  imports: [DatePipe, NgClass],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

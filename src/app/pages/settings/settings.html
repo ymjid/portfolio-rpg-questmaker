@@ -16,7 +16,9 @@
 }
   </div>
 }
-  <button type="button" (click)="onSubmitTag()">Save Tags</button>
+  @if (tagForm.controls.length > 0) {
+    <button type="button" (click)="onSubmitTag()">Save Tags</button>
+  }
 </form>
 
 <form>
@@ -43,6 +45,8 @@
   }
   </div>
 }
-  <button type="button" (click)="onSubmitTheme()">Save Themes</button>
+  @if (themeForm.controls.length > 0) {
+    <button type="button" (click)="onSubmitTheme()">Save Themes</button>
+  }
 </form>
 </div>
