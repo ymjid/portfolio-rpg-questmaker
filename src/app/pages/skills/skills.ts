@@ -29,6 +29,7 @@ export class Skills implements OnInit{
       rate: new FormControl(skill.rate.value),
     }))
   })
+  this.skillOpen = this.dataService.skills().map(() => false)
 }
 
   addForm() {

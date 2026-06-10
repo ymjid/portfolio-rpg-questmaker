@@ -15,7 +15,7 @@
         <label for="questDescription">
             Description: 
         </label>
-        <input id="questDescription" formControlName="description">
+        <textarea id="questDescription" formControlName="description" cols="40" rows="10"></textarea>
         </div>
         <div class="field">
         <label for="stateName">
@@ -62,7 +62,7 @@
         <button type="button" (click)="addTag($index)">Add Tag</button>
         @for (tag of getTagGroup(questIndex).controls; track $index; let tagIndex = $index) {
             <div class="field-group">
-                <div class="group-toggler" (click)="toggleTagSection($index)">Tag {{ tagIndex + 1 }}</div>
+                <div class="group-toggler" (click)="toggleTagSection($index, tagIndex)">Tag {{ tagIndex + 1 }}</div>
                 @if (questTagsOpen[tagIndex]) {
                 <div class="field">
                 <select [formControl]="getTagControl(questIndex, tagIndex)">
@@ -83,8 +83,8 @@
         <button type="button" (click)="addSubquest($index)">Add Subquest</button>
         @for (subquest of getSubquestArray(questIndex).controls; track $index; let subquestIndex = $index) {
             <div class="field-group" [formGroup]="getSubquestGroup(questIndex, subquestIndex)">
-                <div class="group-toggler" (click)="toggleSubquestSection($index)">Subquest {{ subquestIndex + 1 }}</div>
-                @if (questSubquestsOpen[subquestIndex]) {
+                <div class="group-toggler" (click)="toggleSubquestSection($index, $index)">Subquest {{ subquestIndex + 1 }}</div>
+                @if (questSubquestsOpen[questIndex][subquestIndex]) {
                 <div class="field">
                 <label>
                 Subquest Name: 
@@ -113,8 +113,8 @@
         <button type="button" (click)="addImage($index)">Add Image</button>
         @for (image of getImageArray(questIndex).controls; track $index; let imageIndex = $index) {
             <div class="field-group" [formGroup]="getImageGroup(questIndex, imageIndex)">
-                <div class="group-toggler" (click)="toggleImageSection($index)">Image {{ imageIndex + 1 }}</div>
-                @if (questImagesOpen[imageIndex]) {
+                <div class="group-toggler" (click)="toggleImageSection($index, $index)">Image {{ imageIndex + 1 }}</div>
+                @if (questImagesOpen[questIndex][imageIndex]) {
                 <div class="field">
                 <label>
                 Image Url: 

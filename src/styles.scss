@@ -52,6 +52,20 @@ input:hover {
     color: #00ff00;
 }
 
+textarea {
+    border:0.2rem solid #303030;
+    background-color: #7a7a7a;
+    padding:0.5rem;
+    color: rgb(221, 221, 221);
+    vertical-align: top;
+}
+
+textarea:hover {
+    border-color: rgb(0, 160, 0);
+    box-shadow: 0 0 8px #00ff00;
+    color: #00ff00;
+}
+
 .field-group {
     margin:0.5rem 0;
 }

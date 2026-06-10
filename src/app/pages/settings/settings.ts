@@ -31,6 +31,7 @@ export class Settings implements OnInit{
   this.dataService.tags().forEach(tag => {
     this.tagForm.push(new FormControl(tag))
   })
+  this.newTagsOpen = this.dataService.tags().map(() => false)
 
     this.dataService.themes().forEach(theme => {
     this.themeForm.push(new FormGroup({
@@ -44,6 +45,8 @@ export class Settings implements OnInit{
       })
     }))
   })
+
+  this.newThemesOpen = this.dataService.themes().map(() => false)
 }
 
   addNewTag() {

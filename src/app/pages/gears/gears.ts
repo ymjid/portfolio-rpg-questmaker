@@ -34,6 +34,8 @@ export class Gears implements OnInit{
         height: new FormControl(gear.height),
       }))
   })
+
+  this.gearOpen = this.dataService.gears().map(() => false)
 }
 
     addForm() {

@@ -20,24 +20,24 @@ export class Quests implements OnInit {
   
   questForm = new FormArray<FormGroup>([])
   questsOpen: boolean[] = []
-  questTagsOpen: boolean[] = []
-  questSubquestsOpen: boolean[] = []
-  questImagesOpen: boolean[] = []
+  questTagsOpen: boolean[][] = []
+  questSubquestsOpen: boolean[][] = []
+  questImagesOpen: boolean[][] = []
 
   toggleQuestSection(index: number) {
     this.questsOpen[index] = !this.questsOpen[index];
   }
 
-  toggleTagSection(index: number) {
-    this.questTagsOpen[index] = !this.questTagsOpen[index];
+  toggleTagSection(questIndex: number, index: number) {
+    this.questTagsOpen[questIndex][index] = !this.questTagsOpen[questIndex][index];
   }
 
-  toggleSubquestSection(index: number) {
-    this.questSubquestsOpen[index] = !this.questSubquestsOpen[index];
+  toggleSubquestSection(questIndex: number, index: number) {
+    this.questSubquestsOpen[questIndex][index] = !this.questSubquestsOpen[questIndex][index];
   }
 
-  toggleImageSection(index: number) {
-    this.questImagesOpen[index] = !this.questImagesOpen[index];
+  toggleImageSection(questIndex: number, index: number) {
+    this.questImagesOpen[questIndex][index] = !this.questImagesOpen[questIndex][index];
   }
 
     ngOnInit() {
@@ -62,6 +62,17 @@ export class Quests implements OnInit {
         }))),
       }))
   })
+
+  this.questsOpen = this.dataService.quests().map(() => false)
+  this.questTagsOpen = this.dataService.quests().map(quest => 
+    quest.tags.map(() => false)
+  )
+  this.questSubquestsOpen = this.dataService.quests().map(quest => 
+    quest.subquests.map(() => false)
+  )
+  this.questImagesOpen = this.dataService.quests().map(quest => 
+    (quest.images ?? []).map(() => false)
+  )
 }
 
   addQuestForm() {
@@ -78,7 +89,9 @@ export class Quests implements OnInit {
         subquests: new FormArray([]),
         images: new FormArray([])
       }));
-      this.questsOpen.push(true)
+      this.questTagsOpen.push([])
+      this.questSubquestsOpen.push([])
+      this.questImagesOpen.push([])
   }
 
   removeQuest(index: number) {
@@ -94,14 +107,14 @@ export class Quests implements OnInit {
     const quest = this.questForm.at(questIndex) as FormGroup
     const tags = quest.get('tags') as FormArray
     tags.push(new FormControl(''))
-    this.questTagsOpen.push(true)
+    this.questTagsOpen[questIndex].push(true)
   }
 
   removeTag(questIndex: number, tagIndex: number) {
     const quest = this.questForm.at(questIndex) as FormGroup
     const tags = quest.get('tags') as FormArray
     tags.removeAt(tagIndex)
-    this.questTagsOpen.splice(tagIndex, 1)
+    this.questTagsOpen[questIndex].splice(tagIndex, 1)
   }
 
   getTagGroup(index: number): FormArray {
@@ -119,14 +132,14 @@ export class Quests implements OnInit {
         name: new FormControl(""),
         state: new FormControl(""),
     }))
-    this.questSubquestsOpen.push(true)
+    this.questSubquestsOpen[questIndex].push(true)
   }
 
   removeSubquest(questIndex: number, subquestIndex: number) {
     const quest = this.questForm.at(questIndex) as FormGroup
     const subquests = quest.get('subquests') as FormArray
     subquests.removeAt(subquestIndex)
-    this.questSubquestsOpen.splice(subquestIndex, 1)
+    this.questSubquestsOpen[questIndex].splice(subquestIndex, 1)
   }
 
   getSubquestArray(index: number): FormArray {
@@ -144,14 +157,14 @@ export class Quests implements OnInit {
             url: new FormControl(""),
             alt: new FormControl(""),
     }))
-    this.questImagesOpen.push(true);
+    this.questImagesOpen[questIndex].push(true)
   }
 
   removeImage(questIndex: number, imageIndex: number) {
     const quest = this.questForm.at(questIndex) as FormGroup
     const images = quest.get('images') as FormArray
     images.removeAt(imageIndex)
-    this.questImagesOpen.splice(imageIndex, 1)
+    this.questImagesOpen[questIndex].splice(imageIndex, 1)
   }
 
   getImageArray(index: number): FormArray {
