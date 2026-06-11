@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { Data } from '../../services/data';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Gear, Rarety } from '../../data/questmaker.data';
@@ -10,7 +10,7 @@ import { Notif } from '../../services/notif';
   templateUrl: './gears.html',
   styleUrl: './gears.scss',
 })
-export class Gears implements OnInit{
+export class Gears {
   dataService = inject(Data)
   gearRarety = Object.values(Rarety)
   notifService = inject(Notif)
@@ -22,7 +22,9 @@ export class Gears implements OnInit{
     this.gearOpen[index] = !this.gearOpen[index];
   }
 
-      ngOnInit() {
+      constructor() {
+        effect(() => {
+          this.gearForm.clear()
   this.dataService.gears().forEach(gear => {
     this.gearForm.push(new FormGroup({
         name: new FormControl(gear.name),
@@ -36,6 +38,7 @@ export class Gears implements OnInit{
   })
 
   this.gearOpen = this.dataService.gears().map(() => false)
+})
 }
 
     addForm() {

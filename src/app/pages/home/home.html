@@ -12,6 +12,7 @@
         }
         </p>
     </div>
+    @if (release) {
     <div class="container">
         <p class="container-title">Last Release</p>
         <div class="update">
@@ -19,6 +20,8 @@
             <p>{{ release.published_at | date: 'dd/MM/yyyy - HH:mm' }}</p>
         </div>
     </div>
+    }
+    @if (commits) {
     <div class="container">
         <p class="container-title">Last Commits</p>
     <div class="commits">
@@ -30,4 +33,5 @@
         }
     </div>
     </div>
+    }
 </div>

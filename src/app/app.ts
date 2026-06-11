@@ -33,6 +33,8 @@ ngOnInit() {
       this.dataService.setSkills(data.skills)
       this.dataService.setTags(data.tags)
       this.dataService.setThemes(data.themes)
+
+      this.dataService.setLoaded()
     });
 }
 }

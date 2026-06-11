@@ -22,6 +22,12 @@ export class Data {
 
   themes: WritableSignal<Theme[]> = signal([])
 
+  isLoaded = signal(false)
+
+  setLoaded() {
+    this.isLoaded.set(true)
+  }
+
   updateCharacter(editHero: Character) {
         this.hero.set(editHero);
   }

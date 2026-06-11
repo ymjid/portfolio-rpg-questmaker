@@ -1,7 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { Data } from '../../services/data';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Quest, QuestImage, QuestState, ThemeType } from '../../data/questmaker.data';
+import { Quest, QuestImage, QuestState } from '../../data/questmaker.data';
 import { Notif } from '../../services/notif';
 
 @Component({
@@ -10,7 +10,7 @@ import { Notif } from '../../services/notif';
   templateUrl: './quests.html',
   styleUrl: './quests.scss',
 })
-export class Quests implements OnInit {
+export class Quests {
   dataService = inject(Data)
   questState = Object.values(QuestState)
   questTheme = this.dataService.themes
@@ -40,7 +40,9 @@ export class Quests implements OnInit {
     this.questImagesOpen[questIndex][index] = !this.questImagesOpen[questIndex][index];
   }
 
-    ngOnInit() {
+    constructor() {
+      effect(() => {
+        this.questForm.clear()
   this.dataService.quests().forEach(quest => {
     this.questForm.push(new FormGroup({
         id: new FormControl(quest.id),
@@ -73,6 +75,7 @@ export class Quests implements OnInit {
   this.questImagesOpen = this.dataService.quests().map(quest => 
     (quest.images ?? []).map(() => false)
   )
+})
 }
 
   addQuestForm() {

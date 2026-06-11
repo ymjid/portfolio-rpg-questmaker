@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { Data } from '../../services/data';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Theme } from '../../data/questmaker.data';
@@ -10,7 +10,7 @@ import { Notif } from '../../services/notif';
   templateUrl: './settings.html',
   styleUrl: './settings.scss',
 })
-export class Settings implements OnInit{
+export class Settings {
     dataService = inject(Data)
     notifService = inject(Notif)
     
@@ -27,7 +27,10 @@ export class Settings implements OnInit{
     this.newThemesOpen[index] = !this.newThemesOpen[index];
   }
 
-  ngOnInit() {
+  constructor() {
+    effect(() => {
+      this.themeForm.clear()
+      this.tagForm.clear()
   this.dataService.tags().forEach(tag => {
     this.tagForm.push(new FormControl(tag))
   })
@@ -47,6 +50,7 @@ export class Settings implements OnInit{
   })
 
   this.newThemesOpen = this.dataService.themes().map(() => false)
+})
 }
 
   addNewTag() {
