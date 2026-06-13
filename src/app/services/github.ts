@@ -23,4 +23,8 @@ export class GithubService {
   public getDataJson(): Observable<any> {
     return this.httpClient.get<any[]>(`https://raw.githubusercontent.com/ymjid/portfolio-rpg-data/main/data.json`);
   }
+
+  getFileSha(): Observable<any> {
+  return this.httpClient.get("https://api.github.com/repos/ymjid/portfolio-rpg-data/contents/data.json")
+ }
 }

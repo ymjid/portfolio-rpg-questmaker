@@ -19,7 +19,7 @@ h1, h2 {
 #navbar-container {
     height:100vh;
     position:relative;
-    width: 10rem;
+    width: 11rem;
 }
 
 button {
@@ -138,6 +138,11 @@ input:focus {
 
 .saved-msg {
   color: #00ff00;
+  font-family: monospace;
+}
+
+.no-changes-msg {
+  color:rgb(47, 0, 255);
   font-family: monospace;
 }
 

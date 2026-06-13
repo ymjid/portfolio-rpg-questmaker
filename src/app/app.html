@@ -1,9 +1,15 @@
 <div id="navbar-container">
 <app-navbar />
+@if (jsonService.isModalOpen()) {
+  <app-token-modal />
+}
 </div>
 <div id="page-container">
 @if (notifService.saved()) {
   <span class="saved-msg">Saved ✓</span>
+}
+@if (notifService.noChanges()) {
+  <span class="no-changes-msg">No changes detected</span>
 }
 <router-outlet />
 </div>

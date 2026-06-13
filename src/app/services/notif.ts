@@ -10,4 +10,11 @@ export class Notif {
       this.saved.set(true)
       setTimeout(() => this.saved.set(false), 2000)
     }
+
+    noChanges = signal(false)
+
+    showChanges() {
+      this.noChanges.set(true)
+      setTimeout(() => this.noChanges.set(false), 2000)
+    }
 }

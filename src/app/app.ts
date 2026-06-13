@@ -4,10 +4,12 @@ import { Navbar } from './components/navbar/navbar';
 import { Notif } from './services/notif';
 import { GithubService } from './services/github';
 import { Data } from './services/data';
+import { Json } from './services/json';
+import { TokenModal } from './components/token-modal/token-modal';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar],
+  imports: [RouterOutlet, Navbar, TokenModal],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -16,6 +18,7 @@ export class App implements OnInit {
   notifService = inject(Notif)
   githubService = inject(GithubService)
   dataService = inject(Data)
+  jsonService = inject(Json)
 
   @HostListener('document:mousemove', ['$event'])
 onMouseMove(event: MouseEvent) {

@@ -1,0 +1,19 @@
+<div class="modal">
+    <h3>Token Request</h3>
+    <div class="alert-msg">
+        <p>Your token is expired or invalid.</p>
+        <p>Please use a new one</p>
+    </div>
+    <form [formGroup]="tokenForm">
+        <div class="field">
+        <label for="token">
+            Token :
+        </label>
+        <input type="text" formControlName="token" />
+        </div>
+        <div class="actions-container">
+            <button type="button" (click)="onConfirm()">Use Token</button>
+            <button type="button" (click)="onCancel()">Close</button>
+        </div>
+    </form>
+</div>>
