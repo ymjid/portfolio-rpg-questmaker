@@ -85,6 +85,7 @@ textarea:hover {
 
 .field {
     margin:1rem;
+    margin-left:5rem;
     padding:0.5rem 1rem;
     width: fit-content;
 }
@@ -150,7 +151,10 @@ input:focus {
   position: sticky;
   top:0;
   z-index: 10;
-  background-color:#0d0d0d;
   width:100%;
   padding: 1rem 0;
+}
+
+.sticky-background {
+    background-color:#0d0d0d;    
 }
