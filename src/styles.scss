@@ -140,3 +140,12 @@ input:focus {
   color: #00ff00;
   font-family: monospace;
 }
+
+.sticky-button {
+  position: sticky;
+  top:0;
+  z-index: 10;
+  background-color:#0d0d0d;
+  width:100%;
+  padding: 1rem 0;
+}

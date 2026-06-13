@@ -18,6 +18,8 @@ export class Character {
   characterForm = new FormGroup({
     name: new FormControl('', { nonNullable: true, validators: Validators.required }),
     class: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    github: new FormControl('', { nonNullable: true }),
+    linkedin: new FormControl('', { nonNullable: true }),
     state: new FormControl(CharState.LOOKINGJOB, { nonNullable: true, validators: Validators.required }),
   })
 
@@ -26,6 +28,8 @@ export class Character {
     this.characterForm.patchValue({
       name: this.dataService.hero().name,
       class: this.dataService.hero().class,
+      github: this.dataService.hero().github,
+      linkedin: this.dataService.hero().linkedin,
       state: this.dataService.hero().state,
     })
   })

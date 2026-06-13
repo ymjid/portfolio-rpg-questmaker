@@ -1,6 +1,8 @@
 <h1>Quests settings</h1>
 <form>
+    <div class="sticky-button">
     <button type="button" (click)="addQuestForm()">Add Quest</button>
+    </div>
    @for (item of questForm.controls; track $index; let questIndex = $index) {
      <div class="field-group" [formGroup]="getQuestGroup($index)">
         <div class="group-toggler" (click)="toggleQuestSection($index)">Quest {{ questIndex + 1}}</div>
@@ -59,7 +61,9 @@
         <label>
             Tags: 
         </label>
+        <div class="sticky-button">
         <button type="button" (click)="addTag($index)">Add Tag</button>
+        </div>
         @for (tag of getTagGroup(questIndex).controls; track $index; let tagIndex = $index) {
             <div class="field-group">
                 <div class="group-toggler" (click)="toggleTagSection($index, tagIndex)">Tag {{ tagIndex + 1 }}</div>
@@ -80,7 +84,9 @@
         <label>
             Subquests: 
         </label>
+        <div class="sticky-button">
         <button type="button" (click)="addSubquest($index)">Add Subquest</button>
+        </div>
         @for (subquest of getSubquestArray(questIndex).controls; track $index; let subquestIndex = $index) {
             <div class="field-group" [formGroup]="getSubquestGroup(questIndex, subquestIndex)">
                 <div class="group-toggler" (click)="toggleSubquestSection($index, $index)">Subquest {{ subquestIndex + 1 }}</div>
@@ -110,7 +116,9 @@
         <label>
             images: 
         </label>
+        <div class="sticky-button">
         <button type="button" (click)="addImage($index)">Add Image</button>
+        </div>
         @for (image of getImageArray(questIndex).controls; track $index; let imageIndex = $index) {
             <div class="field-group" [formGroup]="getImageGroup(questIndex, imageIndex)">
                 <div class="group-toggler" (click)="toggleImageSection($index, $index)">Image {{ imageIndex + 1 }}</div>

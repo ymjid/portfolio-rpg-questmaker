@@ -1,7 +1,9 @@
 <h1>Miscellaneous settings</h1>
 <div id="form-container">
 <form>
+  <div class="sticky-button">
 <button type="button" (click)="addNewTag()">Add Tag</button>
+</div>
 @for (tag of tagForm.controls; track $index; let tagIndex = $index) {
     <div class="field-group">
       <div class="group-toggler" (click)="toggleNewTagSection($index)">Tag {{ tagIndex + 1 }}</div>
@@ -22,7 +24,9 @@
 </form>
 
 <form>
+  <div class="sticky-button">
 <button type="button" (click)="addNewTheme()">Add Theme</button>
+</div>
 @for (theme of themeForm.controls; track $index; let themeIndex = $index) {
     <div class="field-group">
             <div class="group-toggler" (click)="toggleNewThemeSection($index)">Theme {{ themeIndex + 1 }}</div>

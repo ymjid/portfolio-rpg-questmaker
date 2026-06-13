@@ -1,6 +1,8 @@
 <h1>Skills settings</h1>
 <form>
+    <div class="sticky-button">
     <button type="button" (click)="addForm()">Add Skill</button>
+    </div>
    @for (item of skillForm.controls; track $index) {
      <div class="field-group" [formGroup]="getSkillGroup($index)">
         <div class="group-toggler" (click)="toggleSkillSection($index)">Skill {{ $index + 1 }}</div>
