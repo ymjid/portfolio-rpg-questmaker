@@ -17,4 +17,14 @@ export class Notif {
       this.noChanges.set(true)
       setTimeout(() => this.noChanges.set(false), 2000)
     }
+
+isUploading = signal(false)
+
+showUploading() {
+  this.isUploading.set(true)
+}
+
+hideUploading() {
+  this.isUploading.set(false)
+}
 }

@@ -13,6 +13,7 @@ export class Json {
   isModalOpen = signal(false)
   token: WritableSignal<string | null> = signal(null)
   remoteJson = signal('')
+  pendingImages = signal<{fileName: string, file: File}[]>([])
 
   buildJson() {
     return {
@@ -37,18 +38,24 @@ export class Json {
     URL.revokeObjectURL(url)
   }
 
-  pushToGithub() {
+  async pushToGithub() {
     if (localStorage.getItem('githubToken')) {
       this.token.set(localStorage.getItem('githubToken'))
-      this.githubService.getDataJson().subscribe(remoteData => {
+      this.githubService.getDataJson().subscribe(async remoteData => {
           const localJson = JSON.stringify(this.buildJson())
           const remoteJson = JSON.stringify(remoteData)
   
-          if (localJson === remoteJson) {
+          if (localJson === remoteJson && this.pendingImages().length > 0) {
           this.notifService.showChanges()
           return
         }
-      this.githubService.getFileSha().subscribe({
+        this.notifService.showUploading()
+        await Promise.all(this.pendingImages().map(async ({fileName, file}) => {
+               this.uploadImage(fileName, file)
+        }))
+        this.notifService.hideUploading()
+        this.pendingImages.set([])
+      this.githubService.getFileSha("data.json").subscribe({
         next: (data) => {
           const sha = data.sha
           const url ="https://api.github.com/repos/ymjid/portfolio-rpg-data/contents/data.json"
@@ -100,6 +107,58 @@ setRemoteJson(data: any) {
 }
 
 hasChanges(): boolean {
-  return JSON.stringify(this.buildJson()) !== this.remoteJson()
+  return JSON.stringify(this.buildJson()) !== this.remoteJson() || this.pendingImages().length > 0
+}
+
+addPendingImage(fileName: string, file: File) {
+  this.pendingImages.update(current => [...current, {fileName, file}])
+}
+
+fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => {
+      const base64 = (reader.result as string).split(',')[1]
+      resolve(base64)
+    }
+    reader.onerror = reject
+  })
+}
+
+async uploadImage(fileName: string, file: File): Promise<void> {
+   this.githubService.getFileSha(`assets/${fileName}`).subscribe({
+        next: async (data) => {
+          const sha = data.sha
+          const url = `https://api.github.com/repos/ymjid/portfolio-rpg-data/contents/assets/${fileName}`
+          const body = {
+            message: `upload ${fileName} - ${new Date().toLocaleDateString('en-EN')}`,
+            content: await this.fileToBase64(file),
+            sha: sha,
+          }
+          const headers = { Authorization: `Bearer ${this.token()}` }
+          this.githubService.httpClient.put(url, body, {headers}).subscribe({
+              next: () => {
+                this.notifService.showSaved()
+              },
+              error: (err) => {
+                if (err.status === 401) {
+                }
+              }
+            }
+          )
+        },
+        error: async (err) => {
+          if (err.status === 404) {
+            const url = `https://api.github.com/repos/ymjid/portfolio-rpg-data/contents/assets/${fileName}`
+            const body = {
+                message: `upload ${fileName}`,
+                content: await this.fileToBase64(file),
+            }
+            const headers = { Authorization: `Bearer ${this.token()}` }
+            this.githubService.httpClient.put(url, body, { headers }).subscribe()
+        }
+  }
+})
 }
 }

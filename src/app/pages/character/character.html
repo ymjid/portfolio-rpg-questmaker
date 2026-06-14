@@ -1,6 +1,20 @@
 <h1>Character settings</h1>
 <form [formGroup]="characterForm">
   <div class="field">
+  <label>Profile Picture:</label>
+  <div class="header-picture">
+    <div class="picture-circle">
+  @if (previewUrl()) {
+    <img class="picture-image" [src]="previewUrl()" alt="preview" />
+  } @else if (dataService.hero().img) {
+    <img class="picture-image" [src]="dataService.hero().img" alt="current profile" />
+  }
+  </div>
+  </div>
+  <input  type="file" #fileInput accept="image/*" (change)="onFileSelected($event)" style="display:none" />
+  <button type="button" (click)="fileInput.click()">Changer l'image</button>
+</div>
+  <div class="field">
   <label for="charName">
     Name :
   </label>
