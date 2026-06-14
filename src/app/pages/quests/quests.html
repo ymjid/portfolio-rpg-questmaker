@@ -66,8 +66,8 @@
         </div>
         @for (tag of getTagGroup(questIndex).controls; track $index; let tagIndex = $index) {
             <div class="field-group">
-                <div class="group-toggler" (click)="toggleTagSection($index, tagIndex)">Tag {{ tagIndex + 1 }}</div>
-                @if (questTagsOpen[tagIndex]) {
+                <div class="group-toggler" (click)="toggleTagSection(questIndex, tagIndex)">Tag {{ tagIndex + 1 }}</div>
+                @if (questTagsOpen[questIndex][tagIndex]) {
                 <div class="field">
                 <select [formControl]="getTagControl(questIndex, tagIndex)">
                 @for (tagName of questTag(); track $index) {
@@ -89,7 +89,7 @@
         </div>
         @for (subquest of getSubquestArray(questIndex).controls; track $index; let subquestIndex = $index) {
             <div class="field-group" [formGroup]="getSubquestGroup(questIndex, subquestIndex)">
-                <div class="group-toggler" (click)="toggleSubquestSection($index, $index)">Subquest {{ subquestIndex + 1 }}</div>
+                <div class="group-toggler" (click)="toggleSubquestSection(questIndex, subquestIndex);">Subquest {{ subquestIndex + 1 }}</div>
                 @if (questSubquestsOpen[questIndex][subquestIndex]) {
                 <div class="field">
                 <label>
@@ -121,7 +121,7 @@
         </div>
         @for (image of getImageArray(questIndex).controls; track $index; let imageIndex = $index) {
             <div class="field-group" [formGroup]="getImageGroup(questIndex, imageIndex)">
-                <div class="group-toggler" (click)="toggleImageSection($index, $index)">Image {{ imageIndex + 1 }}</div>
+                <div class="group-toggler" (click)="toggleImageSection(questIndex, $index)">Image {{ imageIndex + 1 }}</div>
                 @if (questImagesOpen[questIndex][imageIndex]) {
                 <div class="field">
                 <label>
