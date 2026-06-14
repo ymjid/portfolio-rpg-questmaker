@@ -14,10 +14,20 @@
         <input id="gearName" formControlName="name">
         </div>
         <div class="field">
-        <label for="gearLogo">
+        <label>
             Logo: 
         </label>
-        <input id="gearLogo" formControlName="logo">
+          <div class="">
+    <div class="picture-slot">
+  @if (previewUrls()) {
+    <img class="" [src]="previewUrls()" alt="preview" />
+  } @else if (dataService.gears()[$index].logo) {
+    <img class="" [src]="dataService.gears()[$index].logo" alt="current gear" />
+  }
+  </div>
+  </div>
+  <input  type="file" #fileInput accept="image/*" (change)="onFileSelected($event, $index)" style="display:none" />
+  <button type="button" (click)="fileInput.click()">Changer l'image</button>
         </div>
         <div class="field">
         <label for="gearRarety">

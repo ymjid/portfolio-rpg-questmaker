@@ -1,8 +1,9 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { Data } from '../../services/data';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Gear, Rarety } from '../../data/questmaker.data';
 import { Notif } from '../../services/notif';
+import { Json } from '../../services/json';
 
 @Component({
   selector: 'app-gears',
@@ -14,9 +15,16 @@ export class Gears {
   dataService = inject(Data)
   gearRarety = Object.values(Rarety)
   notifService = inject(Notif)
+  jsonService = inject(Json)
 
   gearForm = new FormArray<FormGroup>([])
   gearOpen: boolean[] = []
+  selectedFiles: (File | null)[] = []
+  previewUrls = signal<(string | null)[]>([])
+  SlotSize = {
+    width:2,
+    height:2,
+  }
 
   toggleGearSection(index: number) {
     this.gearOpen[index] = !this.gearOpen[index];
@@ -61,6 +69,31 @@ export class Gears {
   
     getGearGroup(index: number): FormGroup {
       return this.gearForm.at(index) as FormGroup
+    }
+
+    onFileSelected(event: Event, index: number) {
+      const file = (event.target as HTMLInputElement).files?.[0]
+      if (!file) return
+      this.selectedFiles[index] = file;
+      const ext = file.name.split('.').pop()
+      const fileName = `gear${index}.${ext}`
+      this.jsonService.addPendingImage(fileName, this.selectedFiles[index])
+
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        this.previewUrls.update(urls => {
+          const newUrls = [...urls]
+          newUrls[index] = reader.result as string
+          return newUrls
+        })
+      }
+
+      const currentGears = this.dataService.gears()
+      this.dataService.editGear({
+        ...currentGears[index],
+        logo: `https://raw.githubusercontent.com/ymjid/portfolio-rpg-data/main/assets/${fileName}`
+      })
     }
   
     onSubmit() {

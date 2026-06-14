@@ -1,0 +1,11 @@
+.picture-slot {
+    width: 4rem;
+    height: 4rem;
+    padding: 0.2rem;
+    background-color: #051208;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
