@@ -14,20 +14,31 @@
     box-shadow: 0 0 8px #00ff00;
 }
 
-#navBar a:link, #navBar a:visited {
+#navBar a:link:not(.active), #navBar a:visited:not(.active) {
   color: rgb(221, 221, 221);
   text-decoration: none;
 }
 
-#download {
+#download:not(.disabled) {
     color: rgb(221, 221, 221);
     cursor: pointer;
 }
 
-#navBar a:hover {
+#navBar a:hover:not(.active) {
   color: #00ff00;
 }
 
 #download:hover {
     color: #00ff00;
+}
+
+.active {
+    pointer-events: none;
+    text-decoration: none;
+    color: rgb(175, 175, 175);
+}
+
+.disabled {
+    color: #b10000;
+    pointer-events: none;
 }

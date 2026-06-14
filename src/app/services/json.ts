@@ -12,6 +12,7 @@ export class Json {
   notifService = inject(Notif)
   isModalOpen = signal(false)
   token: WritableSignal<string | null> = signal(null)
+  remoteJson = signal('')
 
   buildJson() {
     return {
@@ -92,5 +93,13 @@ openModal() {
 
 closeModal() {
   this.isModalOpen.set(false)
+}
+
+setRemoteJson(data: any) {
+  this.remoteJson.set(JSON.stringify(data))
+}
+
+hasChanges(): boolean {
+  return JSON.stringify(this.buildJson()) !== this.remoteJson()
 }
 }

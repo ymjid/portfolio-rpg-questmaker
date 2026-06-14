@@ -37,6 +37,7 @@ ngOnInit() {
       this.dataService.setTags(data.tags)
       this.dataService.setThemes(data.themes)
 
+      this.jsonService.setRemoteJson(data)
       this.dataService.setLoaded()
     });
 }

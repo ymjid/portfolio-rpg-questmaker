@@ -1,8 +1,9 @@
 <div id="navBar">
-    <a routerLink="/character"><ng-icon name="tablerUser" /> Character</a>
-    <a routerLink="/skills"><ng-icon name="tablerBook" /> Skills</a>
-    <a routerLink="/quests"><ng-icon name="tablerList" /> Quests</a>
-    <a routerLink="/gears"> <ng-icon name="tablerShield" /> Gears</a>
-    <a routerLink="/settings"> <ng-icon name="tablerSettings" /> Settings</a>
-    <span id="download" (click)="jsonService.pushToGithub()"><ng-icon name="tablerFile" /> Update Portfolio</span>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><ng-icon name="tablerHome" /> Home</a>
+    <a routerLink="/character" routerLinkActive="active"><ng-icon name="tablerUser" /> Character</a>
+    <a routerLink="/skills" routerLinkActive="active"><ng-icon name="tablerBook" /> Skills</a>
+    <a routerLink="/quests" routerLinkActive="active"><ng-icon name="tablerList" /> Quests</a>
+    <a routerLink="/gears" routerLinkActive="active"> <ng-icon name="tablerShield" /> Gears</a>
+    <a routerLink="/settings" routerLinkActive="active"> <ng-icon name="tablerSettings" /> Settings</a>
+    <span id="download" (click)="jsonService.pushToGithub()" [class.disabled]="!jsonService.hasChanges()"><ng-icon name="tablerFile" /> Update Portfolio</span>
 </div>
