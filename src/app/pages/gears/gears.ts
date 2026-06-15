@@ -45,7 +45,14 @@ export class Gears {
       }))
   })
 
-  this.gearOpen = this.dataService.gears().map(() => false)
+  if (this.gearOpen.length !== this.dataService.gears().length) {
+    this.gearOpen = this.dataService.gears().map(() => false)
+  }
+
+  if (this.selectedFiles.length !== this.dataService.gears().length) {
+    this.selectedFiles = new Array(this.dataService.gears().length).fill(null)
+    this.previewUrls.set(new Array(this.dataService.gears().length).fill(null))
+  }
 })
 }
 

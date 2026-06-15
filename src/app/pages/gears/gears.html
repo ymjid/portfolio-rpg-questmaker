@@ -19,8 +19,8 @@
         </label>
           <div class="">
     <div class="picture-slot">
-  @if (previewUrls()) {
-    <img class="" [src]="previewUrls()" alt="preview" />
+  @if (previewUrls()[$index]) {
+    <img class="" [src]="previewUrls()[$index]" alt="preview" />
   } @else if (dataService.gears()[$index].logo) {
     <img class="" [src]="dataService.gears()[$index].logo" alt="current gear" />
   }

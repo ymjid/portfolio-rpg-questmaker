@@ -5,15 +5,17 @@
 }
 </div>
 <div id="page-container">
+  <div id="msg-container">
+    @if (notifService.isUploading()) {
+  <span class="uploading-msg">Uploading...</span>
+}
 @if (notifService.saved()) {
   <span class="saved-msg">Saved ✓</span>
 }
 @if (notifService.noChanges()) {
   <span class="no-changes-msg">No changes detected</span>
 }
-@if (notifService.isUploading()) {
-  <span class="uploading-msg">Uploading...</span>
-}
+</div>
 <router-outlet />
 </div>
 <div class="cursor"></div>

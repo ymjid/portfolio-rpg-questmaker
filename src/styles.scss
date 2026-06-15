@@ -16,6 +16,11 @@ h1, h2 {
   padding: 1rem;
 }
 
+#msg-container {
+    display:flex;
+    flex-direction: column;
+}
+
 #navbar-container {
     height:100vh;
     position:relative;
