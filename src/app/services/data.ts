@@ -32,52 +32,8 @@ export class Data {
         this.hero.set(editHero);
   }
 
-  addSkill(skill: Skill) {
-    this.skills.update(current => [...current, skill])
-  }
-
-  removeSkill(name: SkillType) {
-    this.skills.update(current => current.filter(skill => skill.name !== name))
-  }
-
-  editSkill(editSkill: Skill) {
-    this.skills.update(current => current.map(skill => {
-      if (skill.name === editSkill.name) {
-        return editSkill
-      }
-      return skill
-    }
-  ))
-  }
-
   setSkills(skills: Skill[]) {
     this.skills.set(skills);
-  }
-
-  addQuest(quest: Quest) {
-    this.quests.update(current => [...current, quest])
-  }
-
-  removeQuest(id: string) {
-    this.quests.update(current => current.filter(quest => quest.id !== id))
-  }
-
-  editQuest(editQuest: Quest) {
-    this.quests.update(current => current.map(quest => {
-      if (quest.id === editQuest.id) {
-        return editQuest
-      }
-      return quest
-    }
-  ))
-  }
-
-  addGear(gear: Gear) {
-    this.gears.update(current => [...current, gear])
-  }
-
-  removeGear(slot: number) {
-    this.gears.update(current => current.filter(gear => gear.slot !== slot))
   }
 
   editGear(editGear: Gear) {

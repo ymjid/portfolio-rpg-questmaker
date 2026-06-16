@@ -67,7 +67,7 @@ export class Json {
             sha: sha,
           }
           const headers = { Authorization: `Bearer ${this.token()}` }
-          this.githubService.httpClient.put(url, body, {headers}).subscribe({
+          this.githubService.put(url, body, {headers}).subscribe({
               next: () => {
                 this.notifService.showSaved()
               },
@@ -141,7 +141,7 @@ async uploadImage(fileName: string, file: File): Promise<void> {
             sha: sha,
           }
           const headers = { Authorization: `Bearer ${this.token()}` }
-          this.githubService.httpClient.put(url, body, {headers}).subscribe({
+          this.githubService.put(url, body, {headers}).subscribe({
               next: () => {
                 this.notifService.showSaved()
               },
@@ -159,42 +159,8 @@ async uploadImage(fileName: string, file: File): Promise<void> {
                 content: await this.fileToBase64(file),
             }
             const headers = { Authorization: `Bearer ${this.token()}` }
-            this.githubService.httpClient.put(url, body, { headers }).subscribe()
+            this.githubService.put(url, body, { headers }).subscribe()
     }
   }
-
-  /* this.githubService.getFileSha(`assets/${fileName}`).subscribe({
-        next: async (data) => {
-          const sha = data.sha
-          const url = `https://api.github.com/repos/ymjid/portfolio-rpg-data/contents/assets/${fileName}`
-          const body = {
-            message: `upload ${fileName} - ${new Date().toLocaleDateString('en-EN')}`,
-            content: await this.fileToBase64(file),
-            sha: sha,
-          }
-          const headers = { Authorization: `Bearer ${this.token()}` }
-          this.githubService.httpClient.put(url, body, {headers}).subscribe({
-              next: () => {
-                this.notifService.showSaved()
-              },
-              error: (err) => {
-                if (err.status === 401) {
-                }
-              }
-            }
-          )
-        },
-        error: async (err) => {
-          if (err.status === 404) {
-            const url = `https://api.github.com/repos/ymjid/portfolio-rpg-data/contents/assets/${fileName}`
-            const body = {
-                message: `upload ${fileName}`,
-                content: await this.fileToBase64(file),
-            }
-            const headers = { Authorization: `Bearer ${this.token()}` }
-            this.githubService.httpClient.put(url, body, { headers }).subscribe()
-        }
-  }
-}) */
 }
 }
