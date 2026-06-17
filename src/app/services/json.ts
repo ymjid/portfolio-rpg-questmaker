@@ -116,8 +116,6 @@ fileToBase64(file: File): Promise<string> {
 }
 
 async uploadImage(fileName: string, file: File): Promise<void> {
-  console.log(`Uploading: ${fileName}`)
-  const base64 = await this.fileToBase64(file)
   try {
     const data = await firstValueFrom(this.githubService.getFileSha(`assets/${fileName}`))
               const sha = data.sha

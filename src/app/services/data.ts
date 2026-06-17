@@ -1,5 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { Character, CharState, Gear, Quest, Skill, SkillType, Theme } from "../data/questmaker.data"
+import { Character, CharState, Gear, Quest, Skill, Theme } from "../data/questmaker.data"
 
 
 @Injectable({

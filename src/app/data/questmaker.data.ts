@@ -36,11 +36,6 @@ export const QuestState = {
     },
 }
 
-export enum ThemeType {
-    SNAKE = "theme-snake",
-    VIDEO = "theme-video",
-}
-
 export type QuestImage = {
     url: string,
     alt: string,
@@ -65,15 +60,6 @@ export interface Quest {
     code?: string,
 }
 
-export enum SkillType {
-    HTML_CSS = "HTML/CSS",
-    JAVASCRIPT = "Javascript",
-    TYPESCRIPT = "TypeScript",
-    ANGULAR = "Angular",
-    SCSS = "SCSS",
-    GIT = "Git"
-}
-
 export const SkillRate = {
     BASIC: { name: "Basic Knowledge", value: 1 },
     INTERMEDIATE: { name: "Intermediate", value: 2 },
@@ -85,15 +71,8 @@ export type SkillRateType = {
 }
 
 export interface Skill {
-    name: SkillType;
+    name: string;
     rate: SkillRateType;
-}
-
-export const GearIcons = {
-    VSCode: "assets/gear-icons/vscode_icon.svg",
-    GitHub: "assets/gear-icons/github_icon.svg",
-    GWD: "assets/gear-icons/gwd_icon.svg",
-    Chrome: "assets/gear-icons/chrome_icon.svg",
 }
 
 export enum Rarety  {
