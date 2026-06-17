@@ -27,24 +27,11 @@ export class Json {
     }
   }
 
-  downloadJson() {
-    const json = this.buildJson();
-    const json_string = JSON.stringify(json, null, 2)
-    const blob = new Blob([json_string], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'data.json'
-    a.click()
-    URL.revokeObjectURL(url)
-  }
-
   async pushToGithub() {
     if (localStorage.getItem('githubToken')) {
       this.token.set(localStorage.getItem('githubToken'))
-      this.githubService.getDataJson().subscribe(async remoteData => {
+      this.githubService.getDataJson().subscribe(async () => {
           const localJson = JSON.stringify(this.buildJson())
-          const remoteJson = JSON.stringify(remoteData)
   
           if (localJson === this.remoteJson() && this.pendingImages().length === 0) {
           this.notifService.showChanges()
@@ -67,7 +54,7 @@ export class Json {
             sha: sha,
           }
           const headers = { Authorization: `Bearer ${this.token()}` }
-          this.githubService.put(url, body, {headers}).subscribe({
+          this.githubService.put(url, body, headers).subscribe({
               next: () => {
                 this.notifService.showSaved()
               },
@@ -141,7 +128,7 @@ async uploadImage(fileName: string, file: File): Promise<void> {
             sha: sha,
           }
           const headers = { Authorization: `Bearer ${this.token()}` }
-          this.githubService.put(url, body, {headers}).subscribe({
+          this.githubService.put(url, body, headers).subscribe({
               next: () => {
                 this.notifService.showSaved()
               },
@@ -159,7 +146,7 @@ async uploadImage(fileName: string, file: File): Promise<void> {
                 content: await this.fileToBase64(file),
             }
             const headers = { Authorization: `Bearer ${this.token()}` }
-            this.githubService.put(url, body, { headers }).subscribe()
+            this.githubService.put(url, body, headers).subscribe()
     }
   }
 }

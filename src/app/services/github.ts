@@ -25,7 +25,7 @@ export class GithubService {
   }
 
   getFileSha(path: string): Observable<any> {
-  return this.httpClient.get(`https://api.github.com/repos/ymjid/portfolio-rpg-data/contents/${path}`)
+  return this.httpClient.get(`https://api.github.com/repos/ymjid/portfolio-rpg-data/contents/${path}?t=${Date.now()}`)
  }
 
  put(url: string, body: any, headers: any) {
